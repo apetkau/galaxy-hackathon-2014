@@ -6,12 +6,12 @@ The version of SMALT I used was the one defined in https://toolshed.g2.bx.psu.ed
 Step 1: Building Docker image
 -----------------------------
 
-I started with a base docker image of `debian/wheezy` (which has apt-get installed), ran this docker container in an interactive mode.  Installed the dependencies (python, smalt, smalt_wrapper.py, etc), and then commited my new image.  The exact set of instructions can be found at [[instructions.sh]].
+I started with a base docker image of `debian/wheezy` (which has apt-get installed), ran this docker container in an interactive mode.  Installed the dependencies (python, smalt, smalt_wrapper.py, etc), and then commited my new image.  The exact set of instructions can be found at [instructions.sh](instructions.sh).
 
 Step 2: Installing Tool configuration
 -------------------------------------
 
-The exact tool configuration file I used can be found at [[smalt_wrapper.xml]].  This is based on https://toolshed.g2.bx.psu.edu/repos/cjav/smalt/file/54855bd8d107/smalt_wrapper.xml.  And can be installed by running:
+The exact tool configuration file I used can be found at [smalt_wrapper.xml](smalt_wrapper.xml).  This is based on https://toolshed.g2.bx.psu.edu/repos/cjav/smalt/file/54855bd8d107/smalt_wrapper.xml.  And can be installed by running:
 
 ```bash
 $ smalt_wrapper.xml galaxy-central/tools/docker/smalt_wrapper.xml

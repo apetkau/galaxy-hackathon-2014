@@ -73,4 +73,4 @@ rking_file ] ; then cp /home/aaron/Projects/galaxy-central/database/job_working_
 Integrating SMALT with Docker
 -----------------------------
 
-Please see documentation at [[smalt/]].
+Please see documentation at [SMALT+Docker](smalt/).
