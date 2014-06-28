@@ -3,10 +3,21 @@ Integration of SMALT into Galaxy and Docker
 
 The version of SMALT I used was the one defined in https://toolshed.g2.bx.psu.edu/repository/find_tools?sort=Repository.name&operation=view_or_manage_repository&id=61631a13f8a13237.  Hopefully someone finds this useful for integrating other docker-based tools in Galaxy.
 
+Building Docker image interactively
+-----------------------------------
+
 Step 1: Building Docker image
 -----------------------------
 
 I started with a base docker image of `debian/wheezy` (which has apt-get installed), ran this docker container in an interactive mode.  Installed the dependencies (python, smalt, smalt_wrapper.py, etc), and then commited my new image.  The exact set of instructions can be found at [instructions.sh](instructions.sh).
+
+Alternatively, you can build this image with the `Dockerfile` in this repository.  You just need to run:
+
+```bash
+$ sudo docker build -t apetkau/smalt-galaxy .
+```
+
+Just make sure to use the same docker image name `apetkau/smalt-galaxy` in the tool configuration step below.
 
 Step 2: Installing Tool configuration
 -------------------------------------
