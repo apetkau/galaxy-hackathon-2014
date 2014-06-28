@@ -1,21 +1,19 @@
 Ideas for running Tools in Docker for Galaxy
 ============
 
-Setup
------
+Initial Galaxy+Tools Docker Setup
+---------------------------
 
 Instructions based on document from https://bitbucket.org/galaxy/galaxy-central/pull-request/401/allow-tools-and-deployers-to-specify/diff.
 
-Setup Latest Galaxy
--------------------
+### Setup Latest Galaxy
 
 ```bash
 $ hg clone https://bitbucket.org/galaxy/galaxy-central
 $ sh run.sh
 ```
 
-Setup Docker Test Tool
-----------------------
+### Setup Docker Test Tool
 
 ```bash
 # Setup tool
@@ -71,3 +69,8 @@ ase/job_working_directory/000/6:/home/aaron/Projects/galaxy-central/database/job
 ron/Projects/galaxy-central/database/files:rw -w /home/aaron/Projects/galaxy-central/database/job_working_directory/000/6 --net none busybox:ubuntu-14.04 /home/aaron/Projects/galaxy-central/database/job_working_directory/000/6/container.sh; return_code=$?; if [ -f /home/aaron/Projects/galaxy-central/database/job_working_directory/000/6/wo
 rking_file ] ; then cp /home/aaron/Projects/galaxy-central/database/job_working_directory/000/6/working_file /home/aaron/Projects/galaxy-central/database/files/000/dataset_10.dat ; fi; sh -c "exit $return_code"
 ```
+
+Integrating SMALT with Docker
+-----------------------------
+
+Please see documentation at [[smalt/]].
