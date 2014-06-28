@@ -1,4 +1,7 @@
-# in docker image from 'debian/wheezy'
+# Run docker image 'debian/wheezy' in interactive mode
+sudo docker run -i -t debian:wheezy
+
+# Run the below in this image
 
 apt-get update
 apt-get install python
@@ -10,27 +13,22 @@ cd tool
 
 wget ftp://ftp.sanger.ac.uk/pub4/resources/software/smalt/smalt-0.7.3.tgz
 tar -xvvzf smalt-0.7.3.tgz
-mv smalt-0.7.3/smalt_x86_64 smalt_unknown # because `uname -i` gives unknown
+
+# because the smalt_wrapper.py finds the binary name based on `uname -i` which is unknown in docker
+mv smalt-0.7.3/smalt_x86_64 smalt_unknown
 
 hg clone https://toolshed.g2.bx.psu.edu/repos/cjav/smalt smalt_deps
 cp smalt_deps/smalt_wrapper.py .
 
-echo "export PATH=/tool/:$PATH" > /etc/profile.d/smalt.sh
-
-
-# in host system
-sudo docker commit -m "Creating SMALT+dependencies image" -a "Aaron Petkau" 81d0bb337043 apetkau/smalt:v1
-
-# add smalt tools to PATH
-
+# add smalt tools to PATH (probably different ways to do this)
 ln -s /tool/smalt_unknown /usr/bin 
 ln -s /tool/smalt_wrapper.py /usr/bin
-
-sudo docker commit -m "Creating SMALT+dependencies image" -a "Aaron Petkau" a96f6ca84897 apetkau/smalt:v2
-
-sudo docker apetkau/smalt:v2
 
 # make smalt_wrapper executable
 chmod a+x /tool/smalt_wrapper.py
 
+# exit out of docker image and run the below to commit to new container.  replace the number '07b...' with container id for the above docker container.
 sudo docker commit -m "make smalt_wrapper executable" -a "Aaron Petkau" 07b937918961 apetkau/smalt:v3
+
+# push to dockerhub
+# please see instructions at http://docs.docker.com/userguide/dockerimages/#push-an-image-to-docker-hub
