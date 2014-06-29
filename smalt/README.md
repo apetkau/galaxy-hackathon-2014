@@ -128,7 +128,7 @@ The exact changes you I needed to make are:
    
    ```xml
      <requirements>
-           <container type="docker">apetkau/smalt:v3</container>
+           <container type="docker">apetkau/galaxy-smalt</container>
      </requirements>
    ```
 
