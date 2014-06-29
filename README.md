@@ -18,63 +18,73 @@ $ sh run.sh
 
 ### Setup Docker Test Tool
 
-A test tool configuration file `catDocker.xml` is included with Galaxy.  This can be setup with the following commands.
+A test tool configuration file `catDocker.xml` is included with Galaxy (or at [catDocker.xml](catDocker.xml)).  This can be setup with the following commands (run within `galaxy-central` directory).
 
-```bash
-$ mkdir tools/docker
-$ cp test/functional/tools/catDocker.xml tools/docker/
-```
+1. Setup `catDocker.xml` tool
+   
+   ```bash
+   $ mkdir tools/docker
+   $ cp test/functional/tools/catDocker.xml tools/docker/
+   ```
+   
+   Now, in the `tool_conf.xml` file please add a new section for this tool:
+   
+   ```xml
+     <section>
+       <tool file="docker/catDocker.xml"/>
+     </section>
+   ```
 
-Now, in the `tool_conf.xml` file please add a new section for this tool:
+2. Construct a `job_conf.xml` which instructs Galaxy to run tools docker-based tools using docker.
+   
+   Construct a basic `job_conf.xml` with the following command.
+   
+   ```bash
+   cp job_conf.xml.sample_basic job_conf.xml
+   ```
+   
+   Add a docker destination in `job_conf.xml` to enable running through docker:
+   
+   ```xml
+       <destinations default="docker_local">
+          <destination id="local" runner="local"/>
+          <destination id="docker_local" runner="local">
+            <param id="docker_enabled">true</param>
+          </destination>
+       </destinations>
+   ```
+   
+   More information can be found in the `job_conf.xml.sample_advanced` file that comes with Galaxy.
 
-```xml
-  <section>
-    <tool file="docker/catDocker.xml"/>
-  </section>
-```
+3. Enable docker to run using sudo without a password.
 
-Create `job_conf.xml` and add
+   Add docker runner to sudoers file (replace `galaxy` with your username you are running galaxy under):
 
-```bash
-cp job_conf.xml.sample_basic job_conf.xml
-```
+   ```
+   galaxy  ALL = (root) NOPASSWD: SETENV: /usr/bin/docker
+   ```
 
-Add in `job_conf.xml`:
+4. Start up Galaxy
 
-```xml
-    <destinations default="docker_local">
-       <destination id="local" runner="local"/>
-       <destination id="docker_local" runner="local">
-         <param id="docker_enabled">true</param>
-       </destination>
-    </destinations>
-```
+   ```bash
+   $ sh run.sh
+   ```
 
-Add docker runner to sudoers file (replace `galaxy` with your username you are running galaxy under):
+5. Test
 
-```
-galaxy  ALL = (root) NOPASSWD: SETENV: /usr/bin/docker
-```
+   Run test tool **Concatenate datasets (in docker)**
 
-Run Galaxy
+   Check log file.  If the tool ran you should see entries with `docker` like:
 
-```bash
-$ sh run.sh
-```
-
-Run test tool **Concatenate datasets (in docker)**
-
-Check log file.  If tool ran you should see entries like:
-
-```
- command is: sudo docker run -e "GALAXY_SLOTS=$GALAXY_SLOTS" -v /home/aaron/Projects/galaxy-central:/home/aaron/Proje
-cts/galaxy-central:ro -v /home/aaron/Projects/galaxy-central/tools/docker:/home/aaron/Projects/galaxy-central/tools/docker:ro -v /home/aaron/Projects/galaxy-central/datab
-ase/job_working_directory/000/6:/home/aaron/Projects/galaxy-central/database/job_working_directory/000/6:rw -v /home/aaron/Projects/galaxy-central/database/files:/home/aa
-ron/Projects/galaxy-central/database/files:rw -w /home/aaron/Projects/galaxy-central/database/job_working_directory/000/6 --net none busybox:ubuntu-14.04 /home/aaron/Projects/galaxy-central/database/job_working_directory/000/6/container.sh; return_code=$?; if [ -f /home/aaron/Projects/galaxy-central/database/job_working_directory/000/6/wo
-rking_file ] ; then cp /home/aaron/Projects/galaxy-central/database/job_working_directory/000/6/working_file /home/aaron/Projects/galaxy-central/database/files/000/dataset_10.dat ; fi; sh -c "exit $return_code"
-```
+   ```
+    command is: sudo docker run -e "GALAXY_SLOTS=$GALAXY_SLOTS" -v /home/aaron/Projects/galaxy-central:/home/aaron/Proje
+   cts/galaxy-central:ro -v /home/aaron/Projects/galaxy-central/tools/docker:/home/aaron/Projects/galaxy-central/tools/docker:ro -v /home/aaron/Projects/galaxy-central/datab
+   ase/job_working_directory/000/6:/home/aaron/Projects/galaxy-central/database/job_working_directory/000/6:rw -v /home/aaron/Projects/galaxy-central/database/files:/home/aa
+   ron/Projects/galaxy-central/database/files:rw -w /home/aaron/Projects/galaxy-central/database/job_working_directory/000/6 --net none busybox:ubuntu-14.04 /home/aaron/Projects/galaxy-central/database/job_working_directory/000/6/container.sh; return_code=$?; if [ -f /home/aaron/Projects/galaxy-central/database/job_working_directory/000/6/wo
+   rking_file ] ; then cp /home/aaron/Projects/galaxy-central/database/job_working_directory/000/6/working_file /home/aaron/Projects/galaxy-central/database/files/000/dataset_10.dat ; fi; sh -c "exit $return_code"
+   ```
 
 Integrating SMALT with Docker
 -----------------------------
 
-Please see documentation at [SMALT+Docker](smalt/).
+This contains information on how to integrated a more complicated tool (SMALT) with Docker.  Please see documentation at [SMALT+Docker](smalt/).
