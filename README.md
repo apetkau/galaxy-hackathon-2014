@@ -58,7 +58,7 @@ A test tool configuration file `catDocker.xml` is included with Galaxy (or at [c
 
 3. Enable docker to run using sudo without a password.
 
-   Add docker runner to sudoers file (replace `galaxy` with your username you are running galaxy under):
+   Add docker runner to sudoers file (replace `galaxy` with the username you are running galaxy under):
 
    ```
    galaxy  ALL = (root) NOPASSWD: SETENV: /usr/bin/docker
