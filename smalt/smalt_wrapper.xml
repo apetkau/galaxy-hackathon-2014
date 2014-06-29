@@ -1,6 +1,6 @@
 <tool id="smalt_wrapper (docker)" name="SMALT" version="0.0.3">
   <requirements>
-	<container type="docker">apetkau/smalt:v3</container>
+	<container type="docker">apetkau/galaxy-smalt</container>
   </requirements>
   <description>maps query reads onto the reference sequences</description>
   <command>
