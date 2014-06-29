@@ -85,7 +85,7 @@ $ sudo docker push apetkau/smalt-galaxy
 ```
 
 B. Building an image using a `Dockerfile`
-=========================================
+-----------------------------------------
 
 Alternatively, instead of building an image interactively, you can build an image with a `Dockerfile`.  An example Dockerfile can be found in this repository.  To build an image please run:
 
@@ -96,7 +96,7 @@ $ sudo docker build -t apetkau/smalt-galaxy .
 More information on Dockerfiles can be found at https://docs.docker.com/reference/builder/.
 
 2. Installing Tool configuration
--------------------------------------
+================================
 
 ### Installing Example file
 
