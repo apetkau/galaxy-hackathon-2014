@@ -1,27 +1,31 @@
-Ideas for running Tools in Docker for Galaxy
-============
+Integrating Docker-based tools within Galaxy
+============================================
 
-Initial Galaxy+Tools Docker Setup
----------------------------
+This document describes a method for integrating [Docker](http://www.docker.com/) based tools within [Galaxy](http://galaxyproject.org/).  Docker is a method for wrapping up a tool along with all of it's dependencies into a single container which can be distrubted with the help of [Dockerhub](https://hub.docker.com/).  A method to run docker based tools was added to Galaxy in https://bitbucket.org/galaxy/galaxy-central/pull-request/401/allow-tools-and-deployers-to-specify/diff.
 
-Instructions based on document from https://bitbucket.org/galaxy/galaxy-central/pull-request/401/allow-tools-and-deployers-to-specify/diff.
+Initial Galaxy and Docker Setup
+-------------------------------
 
 ### Setup Latest Galaxy
 
+Please download and setup the latest Galaxy from galaxy-central.  More detailed instructions are found at https://wiki.galaxyproject.org/Admin/GetGalaxy but the two main commands you need to run are:
+
 ```bash
 $ hg clone https://bitbucket.org/galaxy/galaxy-central
+$ cd galaxy-central
 $ sh run.sh
 ```
 
 ### Setup Docker Test Tool
 
+A test tool configuration file `catDocker.xml` is included with Galaxy.  This can be setup with the following commands.
+
 ```bash
-# Setup tool
 $ mkdir tools/docker
 $ cp test/functional/tools/catDocker.xml tools/docker/
 ```
 
-In `tool_conf.xml` add 
+Now, in the `tool_conf.xml` file please add a new section for this tool:
 
 ```xml
   <section>
