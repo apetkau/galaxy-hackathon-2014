@@ -9,7 +9,7 @@ Building Docker image interactively
 Step 1: Building Docker image
 -----------------------------
 
-I started with a base docker image of `debian/wheezy` (which has apt-get installed), ran this docker container in an interactive mode.  Installed the dependencies (python, smalt, smalt_wrapper.py, etc), and then commited my new image.  The exact set of instructions can be found at [instructions.sh](instructions.sh).
+I started with a base docker image of `debian/wheezy` (which has apt-get installed), ran this docker container in an interactive mode.  Installed the dependencies (python, smalt, smalt_wrapper.py, etc), and then commited my new image.  This image is on https://registry.hub.docker.com/u/apetkau/smalt/.  The exact set of instructions can be found at [instructions.sh](instructions.sh).
 
 Alternatively, you can build this image with the `Dockerfile` in this repository.  You just need to run:
 
@@ -25,7 +25,7 @@ Step 2: Installing Tool configuration
 The exact tool configuration file I used can be found at [smalt_wrapper.xml](smalt_wrapper.xml).  This is based on https://toolshed.g2.bx.psu.edu/repos/cjav/smalt/file/54855bd8d107/smalt_wrapper.xml.  And can be installed by running:
 
 ```bash
-$ smalt_wrapper.xml galaxy-central/tools/docker/smalt_wrapper.xml
+$ cp smalt_wrapper.xml galaxy-central/tools/docker/smalt_wrapper.xml
 ```
 
 Then, I added the tool to the `tool_conf.xml` by adding
