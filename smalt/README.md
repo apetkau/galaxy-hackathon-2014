@@ -1,15 +1,17 @@
 Integration of SMALT into Galaxy and Docker
 ===========================================
 
-This describes a way to construct a docker image and modify a tool within Galaxy to work with Docker.  The tool I use is SMALT from https://toolshed.g2.bx.psu.edu/repository/find_tools?sort=Repository.name&operation=view_or_manage_repository&id=61631a13f8a13237.  I describe two different methods to construct a docker image:
-
-A. Interactively
-B. Using a `Dockerfile`
+This describes a way to construct a docker image and modify a tool within Galaxy to work with Docker.  The tool I use is SMALT from https://toolshed.g2.bx.psu.edu/repository/find_tools?sort=Repository.name&operation=view_or_manage_repository&id=61631a13f8a13237.
 
 1. Building a Docker Image
 ==========================
 
-A. Building a Docker Image Interactively
+There are two different methods to construct a docker image for a tool:
+
+1. Interactively
+2. Using a `Dockerfile`
+
+1. Building a Docker Image Interactively
 ----------------------------------------
 
 The interactive method of constructing a docker image is a good method for installing all the dependencies for a tool if you're not quite sure exactly what commands you need to run to get the tool working.  This method involves starting up a docker container, and running commands within this container to get your tool working.  Then, you can **commit** this container to an image and save to dockerhub for re-use.
@@ -84,7 +86,7 @@ To push this image to dockerhub you can run:
 $ sudo docker push apetkau/smalt-galaxy
 ```
 
-B. Building an image using a `Dockerfile`
+2. Building an image using a `Dockerfile`
 -----------------------------------------
 
 Alternatively, instead of building an image interactively, you can build an image with a `Dockerfile`.  An example Dockerfile can be found in this repository at [Dockerfile](Dockerfile).  To build an image please run:
